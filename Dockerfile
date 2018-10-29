@@ -15,7 +15,7 @@ XDG_CONFIG_HOME="/config"
 
 COPY root/ /
 
-RUN apt-get update && apt-get install -y wget curl && chmod +x /docker-entrypoint.sh
+RUN ls / && apt-get update && apt-get install -y wget curl
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 
