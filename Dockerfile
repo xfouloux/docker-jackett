@@ -15,9 +15,9 @@ XDG_CONFIG_HOME="/config"
 
 COPY root/ /
 
-RUN ls / && apt-get update && apt-get install -y wget curl
+RUN chmod +x /usr/local/bin/entrypoint.sh && apt-get update && apt-get install -y wget curl
 
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["entrypoint.sh"]
 
 # ports and volumes
 VOLUME /config /downloads
