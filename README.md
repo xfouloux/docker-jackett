@@ -17,6 +17,7 @@ docker create \
 -e PGID=<gid> -e PUID=<uid> \
 -e TZ=<timezone> \
 -e JACKETT_PRE_BUILD=1 \
+-e JACKETT_NO_UPDATES=0 \
 -v /etc/localtime:/etc/localtime:ro \
 -p 9117:9117 \
 sclemenceau/docker-jackett
@@ -39,6 +40,7 @@ http://192.168.x.x:8080 would show you what's running INSIDE the container on po
 * `-e PGID` for GroupID - see below for explanation
 * `-e PUID` for UserID - see below for explanation
 * `-e JACKETT_PRE_BUILD` for using Pre-Build Releases put value to 1 (not enabled by default)
+* `-e JACKETT_NO_UPDATES` put value to 1 to not autoupdate (autoupdate is enabled by default)
 
 It is based on ubuntu xenial with s6 overlay, for shell access whilst the container is running do `docker exec -it jackett /bin/bash`.
 
@@ -78,4 +80,5 @@ Disable autoupdates in the webui to prevent jackett crashing, the image is refre
 
 ## Versions
 
++ **30.10.18:** Added JACKETT_NO_UPDATES Tag
 + **29.10.18:** FORK -> Added JACKETT_PRE_BUILD Tag

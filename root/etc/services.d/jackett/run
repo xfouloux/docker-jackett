@@ -1,4 +1,10 @@
 #!/usr/bin/with-contenv bash
 
+if [ $JACKETT_NO_UPDATES -eq 1 ]; then
+  UPDATE="--NoUpdates"
+else
+  UPDATE=""
+fi
+
 exec \
-	s6-setuidgid abc mono /app/Jackett/JackettConsole.exe --NoUpdates "${RUN_OPTS}"
+	s6-setuidgid abc mono /app/Jackett/JackettConsole.exe $UPDATE "${RUN_OPTS}"

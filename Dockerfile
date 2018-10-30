@@ -3,7 +3,8 @@ FROM lsiobase/mono:xenial
 # set version label
 ARG BUILD_DATE=29.10.18
 ARG VERSION=1.0
-ENV JACKETT_PRE_BUILD=1
+ARG JACKETT_PRE_BUILD=1
+ARG JACKETT_NO_UPDATES=0
 
 LABEL build_version="Linuxserver.io modified sclemenceau version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="sclemenceau"
