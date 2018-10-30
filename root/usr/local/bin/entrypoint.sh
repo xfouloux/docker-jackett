@@ -14,5 +14,3 @@ curl -o /tmp/jacket.tar.gz -L https://github.com/Jackett/Jackett/releases/downlo
 tar xf /tmp/jacket.tar.gz -C /app/Jackett --strip-components=1
 echo "**** fix for host id mapping error ****
 chown -R root:root /app/Jackett
-
-exec "$@"
