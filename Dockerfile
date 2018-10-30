@@ -15,9 +15,7 @@ XDG_CONFIG_HOME="/config"
 
 COPY root/ /
 
-RUN chmod +x /usr/local/bin/entrypoint.sh && ln -s /usr/local/bin/entrypoint.sh /entrypoint.sh && apt-get update && apt-get install -y wget curl
-
-ENTRYPOINT ["/entrypoint.sh"]
+RUN apt-get update && apt-get install -y wget curl
 
 # ports and volumes
 VOLUME /config /downloads
