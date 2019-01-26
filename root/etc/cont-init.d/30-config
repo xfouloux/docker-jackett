@@ -16,7 +16,7 @@ tar xf /tmp/jacket.tar.gz -C /app/Jackett --strip-components=1
 
 if [ $JACKETT_TRACKERFIX -eq 1 ]; then
   echo "***** TEMP FIX FOR TRACKERS *****"
-  mv /root/trackersfix/* /app/Jackett/Definitions/
+  mv /trackersfix/* /app/Jackett/Definitions/
 fi
 
 echo "**** fix for host id mapping error ****"
