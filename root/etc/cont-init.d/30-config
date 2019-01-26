@@ -19,6 +19,9 @@ echo "***** TEMP FIX FOR TRACKERS *****"
 curl -o yggtorrent.yml -L https://raw.githubusercontent.com/Jackett/Jackett/4d32627382db6b03d5602adb6191e307395f3be1/src/Jackett.Common/Definitions/yggtorrent.yml
 mv yggtorrent.yml /app/Jackett/Definitions/yggtorrent.yml
 
+curl -o archetorrent.yml -L https://raw.githubusercontent.com/Jackett/Jackett/3cf12e2c6576f1d1a475ce0f10579eb697b3386b/src/Jackett.Common/Definitions/archetorrent.yml
+mv archetorrent.yml /app/Jackett/Definitions/archetorrent.yml
+
 echo "**** fix for host id mapping error ****"
 chown -R root:root /app/Jackett
 
