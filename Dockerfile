@@ -5,6 +5,7 @@ ARG BUILD_DATE=30.10.18
 ARG VERSION=1.1
 ENV JACKETT_PRE_BUILD=1
 ENV JACKETT_NO_UPDATES=0
+ENV JACKETT_TRACKERFIX=0
 
 LABEL build_version="Linuxserver.io modified sclemenceau version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="sclemenceau"

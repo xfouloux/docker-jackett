@@ -18,6 +18,7 @@ docker create \
 -e TZ=<timezone> \
 -e JACKETT_PRE_BUILD=1 \
 -e JACKETT_NO_UPDATES=0 \
+-e JACKETT_TRACKERFIX=1 \
 -v /etc/localtime:/etc/localtime:ro \
 -p 9117:9117 \
 sclemenceau/docker-jackett
@@ -41,6 +42,7 @@ http://192.168.x.x:8080 would show you what's running INSIDE the container on po
 * `-e PUID` for UserID - see below for explanation
 * `-e JACKETT_PRE_BUILD` for using Pre-Build Releases put value to 1 (not enabled by default)
 * `-e JACKETT_NO_UPDATES` put value to 1 to not autoupdate (autoupdate is enabled by default)
+* `-e JACKETT_TRACKERFIX` permit to put any tracker definition in the jackett dir (override or new) from the /root/trackersfix/ folder
 
 It is based on ubuntu xenial with s6 overlay, for shell access whilst the container is running do `docker exec -it jackett /bin/bash`.
 
