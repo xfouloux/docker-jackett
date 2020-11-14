@@ -2,7 +2,8 @@
 
 mkdir -p /app/Jackett
 curl -o /tmp/jackett.zip -L https://github.com/abeloin/Jackett/releases/download/v0.16.2148.1/Jackett.Binaries.LinuxAMDx64.zip
-unzip -u -j /tmp/jackett.zip -d /app/Jackett
+unzip -u /tmp/jackett.zip -d /tmp/Jackett
+mv /tmp/Jackett/* /app/
 
 echo "**** fix for host id mapping error ****"
 chown -R root:root /app/Jackett
