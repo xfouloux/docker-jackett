@@ -16,9 +16,6 @@ docker create \
 -v <path to blackhole>:/downloads \
 -e PGID=<gid> -e PUID=<uid> \
 -e TZ=<timezone> \
--e JACKETT_PRE_BUILD=1 \
--e JACKETT_NO_UPDATES=0 \
--e JACKETT_TRACKERFIX=1 \
 -v /etc/localtime:/etc/localtime:ro \
 -p 9117:9117 \
 sclemenceau/docker-jackett
@@ -31,7 +28,6 @@ For example with a port -p external:internal - what this shows is the port mappi
 So -p 8080:80 would expose port 80 from inside the container to be accessible from the host's IP on port 8080
 http://192.168.x.x:8080 would show you what's running INSIDE the container on port 80.`
 
-
 * `-p 9117` - the port(s)
 * `-v /config` - where Jackett should store its config file.
 * `-v /downloads` - Path to torrent blackhole
@@ -40,9 +36,6 @@ http://192.168.x.x:8080 would show you what's running INSIDE the container on po
 * `-e RUN_OPTS` - Optionally specify additional arguments to be passed. EG. `--ProxyConnection=10.0.0.100:1234`
 * `-e PGID` for GroupID - see below for explanation
 * `-e PUID` for UserID - see below for explanation
-* `-e JACKETT_PRE_BUILD` for using Pre-Build Releases put value to 1 (not enabled by default)
-* `-e JACKETT_NO_UPDATES` put value to 1 to not autoupdate (autoupdate is enabled by default)
-* `-e JACKETT_TRACKERFIX` permit to put any tracker definition in the jackett dir (override or new) from the /root/trackersfix/ folder
 
 It is based on ubuntu xenial with s6 overlay, for shell access whilst the container is running do `docker exec -it jackett /bin/bash`.
 
@@ -79,8 +72,3 @@ Disable autoupdates in the webui to prevent jackett crashing, the image is refre
 * image version number
 
 `docker inspect -f '{{ index .Config.Labels "build_version" }}' sclemenceau/docker-jackett`
-
-## Versions
-
-+ **30.10.18:** Added JACKETT_NO_UPDATES Tag
-+ **29.10.18:** FORK -> Added JACKETT_PRE_BUILD Tag
