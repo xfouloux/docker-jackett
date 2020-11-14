@@ -1,5 +1,6 @@
 #!/usr/bin/with-contenv bash
 
+rm -rf /app/Jackett
 mkdir -p /app/Jackett
 curl -o /tmp/jackett.zip -L https://github.com/abeloin/Jackett/releases/download/v0.16.2148.1/Jackett.Binaries.LinuxAMDx64.zip
 unzip -u /tmp/jackett.zip -d /tmp/Jackett
