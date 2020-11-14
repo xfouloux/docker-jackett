@@ -5,6 +5,9 @@ curl -o /tmp/jackett.zip -L https://github.com/abeloin/Jackett/releases/download
 unzip -u /tmp/jackett.zip -d /tmp/Jackett
 mv /tmp/Jackett/* /app/
 
+chmod +x /app/Jackett/*.sh
+chmod +x /app/Jackett/jackett
+
 echo "**** fix for host id mapping error ****"
 chown -R root:root /app/Jackett
 
