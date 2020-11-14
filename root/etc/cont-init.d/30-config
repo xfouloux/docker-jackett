@@ -1,33 +1,8 @@
 #!/usr/bin/with-contenv bash
 
-if [ $JACKETT_PRE_BUILD -eq 1 ]; then
-  url="https://api.github.com/repos/Jackett/Jackett/releases"
-  vers="PRE-RELEASE"
-else
-  url="https://api.github.com/repos/Jackett/Jackett/releases/latest"
-  vers="RELEASE"
-fi
-
-echo "**** install jackett $vers ****"
 mkdir -p /app/Jackett
-jack_tag=$(curl -sX GET "$url" | awk '/tag_name/{print $4;exit}' FS='[""]')
-curl -o /tmp/jacket.tar.gz -L https://github.com/abeloin/Jackett/releases/download/v0.16.2148.1/Jackett.Binaries.LinuxAMDx64.zip
-tar xf /tmp/jacket.tar.gz -C /app/Jackett --strip-components=1
-
-if [ $JACKETT_TRACKERFIX -eq 1 ]; then
-  echo "***** TEMP FIX FOR TRACKERS *****"
-  if [[ -n "$(ls -A /trackersfix 2>/dev/null)" ]]
-  then
-    echo "#### copy yml files from /trackersfix/ ####"
-    cp /trackersfix/* /app/Jackett/Definitions/
-  fi
-  
-  if [[ -n "$(ls -A /config/trackersfix 2>/dev/null)" ]]
-  then
-    echo "#### copy yml files from /config/trackersfix/ ####"
-    cp /config/trackersfix/* /app/Jackett/Definitions/
-  fi
-fi
+curl -o /tmp/jackett.zip -L https://github.com/abeloin/Jackett/releases/download/v0.16.2148.1/Jackett.Binaries.LinuxAMDx64.zip
+unzip -u -j /tmp/jackett.zip -d /app/Jackett
 
 echo "**** fix for host id mapping error ****"
 chown -R root:root /app/Jackett
