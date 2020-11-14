@@ -7,4 +7,4 @@ else
 fi
 
 exec \
-	s6-setuidgid abc mono /app/Jackett/JackettConsole.exe $UPDATE "${RUN_OPTS}"
+	s6-setuidgid abc /app/Jackett/jackett_launcher.sh $UPDATE "${RUN_OPTS}"
