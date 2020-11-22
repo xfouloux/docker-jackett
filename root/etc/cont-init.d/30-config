@@ -2,8 +2,26 @@
 
 rm -rf /app/Jackett
 mkdir -p /app/Jackett
-curl -o /tmp/jackett.zip -L https://github.com/abeloin/Jackett/releases/download/v0.16.2148.1/Jackett.Binaries.LinuxAMDx64.zip
-unzip -u /tmp/jackett.zip -d /tmp/Jackett
+
+#Get latest version of release
+url="https://api.github.com/repos/abeloin/Jackett/releases"
+tag=$(curl -sX GET "$url" | awk '/tag_name/{print $4;exit}' FS='[""]')
+ARCH=`uname -m`
+
+echo "***** installing cloudproxdy bin from @abeloin, version $tag for arch $ARCH *****"
+if [ "$ARCH" == "x86_64" ]; then
+   BINARY="https://github.com/abeloin/Jackett/releases/download/$tag/Jackett.Binaries.LinuxAMDx64.tar.gz"
+elif [ "$ARCH" == "arm64v8" ]; then
+   BINARY="https://github.com/abeloin/Jackett/releases/download/$tag/Jackett.Binaries.LinuxARM64.tar.gz"
+elif [ "$ARCH" == "arm32v7" ]; then
+   BINARY="https://github.com/abeloin/Jackett/releases/download/$tag/Jackett.Binaries.LinuxARM32.tar.gz"
+else
+   echo "unknown arch"
+   exit
+fi
+
+curl -o /tmp/jackett.tar.gz -L "$BINARY"
+tar -xzf /tmp/jackett.tar.gz -C /tmp/
 mv /tmp/Jackett/* /app/
 
 chmod +x /app/Jackett/*.sh
