@@ -11,9 +11,9 @@ ARCH=`uname -m`
 echo "***** installing cloudproxdy bin from @abeloin, version $tag for arch $ARCH *****"
 if [ "$ARCH" == "x86_64" ]; then
    BINARY="https://github.com/abeloin/Jackett/releases/download/$tag/Jackett.Binaries.LinuxAMDx64.tar.gz"
-elif [ "$ARCH" == "arm64v8" ]; then
+elif [ "$ARCH" == "aarch64" ]; then
    BINARY="https://github.com/abeloin/Jackett/releases/download/$tag/Jackett.Binaries.LinuxARM64.tar.gz"
-elif [ "$ARCH" == "arm32v7" ]; then
+elif [ "$ARCH" == "armv7l" ]; then
    BINARY="https://github.com/abeloin/Jackett/releases/download/$tag/Jackett.Binaries.LinuxARM32.tar.gz"
 else
    echo "unknown arch"
