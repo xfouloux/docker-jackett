@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv bash
 
 rm -rf /app/Jackett
-mkdir -p /app/Jackett
+#mkdir -p /app/Jackett
 
 #Get latest version of release
 url="https://api.github.com/repos/abeloin/Jackett/releases"
@@ -21,8 +21,8 @@ else
 fi
 
 curl -o /tmp/jackett.tar.gz -L "$BINARY"
-tar -xzf /tmp/jackett.tar.gz -C /tmp/
-mv /tmp/Jackett/* /app/Jackett/
+tar -xzf /tmp/jackett.tar.gz -C /app/
+#mv /tmp/Jackett/* /app/Jackett/
 
 chmod +x /app/Jackett/*.sh
 chmod +x /app/Jackett/jackett
