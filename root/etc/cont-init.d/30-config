@@ -6,7 +6,7 @@ rm -rf /app/*
 if [ $JACKETT_PRE_BUILD -eq 1 ]; then
   url="https://api.github.com/repos/abeloin/Jackett/releases"
   vers="PRE-RELEASE"
-  tag=$(curl -sX GET "$url" | grep -C 4 '"prerelease": true' | awk '/tag_name/{print $4;exit}' FS='[""]'
+  tag=$(curl -sX GET "$url" | grep -C 4 '"prerelease": true' | awk '/tag_name/{print $4;exit}' FS='[""]')
 else
   url="https://api.github.com/repos/abeloin/Jackett/releases/latest"
   vers="RELEASE"
