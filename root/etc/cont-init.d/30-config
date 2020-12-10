@@ -1,14 +1,21 @@
 #!/usr/bin/with-contenv bash
 
 rm -rf /app/*
-#mkdir -p /app/Jackett
 
 #Get latest version of release
-url="https://api.github.com/repos/abeloin/Jackett/releases"
-tag=$(curl -sX GET "$url" | awk '/tag_name/{print $4;exit}' FS='[""]')
+if [ $JACKETT_PRE_BUILD -eq 1 ]; then
+  url="https://api.github.com/repos/abeloin/Jackett/releases"
+  vers="PRE-RELEASE"
+  tag=$(curl -sX GET "$url" | grep -C 4 '"prerelease": true' | awk '/tag_name/{print $4;exit}' FS='[""]'
+else
+  url="https://api.github.com/repos/abeloin/Jackett/releases/latest"
+  vers="RELEASE"
+  tag=$(curl -sX GET "$url" | awk '/tag_name/{print $4;exit}' FS='[""]')
+fi
+
 ARCH=`uname -m`
 
-echo "***** installing cloudproxdy bin from @abeloin, version $tag for arch $ARCH *****"
+echo "***** installing cloudproxy bin from @abeloin, version $vers / tag $tag for arch $ARCH *****"
 if [ "$ARCH" == "x86_64" ]; then
    BINARY="https://github.com/abeloin/Jackett/releases/download/$tag/Jackett.Binaries.LinuxAMDx64.tar.gz"
 elif [ "$ARCH" == "aarch64" ]; then
