@@ -36,6 +36,7 @@ http://192.168.x.x:8080 would show you what's running INSIDE the container on po
 * `-e RUN_OPTS` - Optionally specify additional arguments to be passed. EG. `--ProxyConnection=10.0.0.100:1234`
 * `-e PGID` for GroupID - see below for explanation
 * `-e PUID` for UserID - see below for explanation
+* `-e JACKETT_PRE_BUILD` use this with value 1 to fetch pre-releases instead of releases
 
 It is based on ubuntu xenial with s6 overlay, for shell access whilst the container is running do `docker exec -it jackett /bin/bash`.
 
