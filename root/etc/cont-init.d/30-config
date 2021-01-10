@@ -1,18 +1,39 @@
 #!/usr/bin/with-contenv bash
 
+rm -rf /app/*
+
+#Get latest version of release
 if [ $JACKETT_PRE_BUILD -eq 1 ]; then
   url="https://api.github.com/repos/Jackett/Jackett/releases"
   vers="PRE-RELEASE"
+  tag=$(curl -sX GET "$url" | grep -C 4 '"prerelease": true' | awk '/tag_name/{print $4;exit}' FS='[""]')
+  export $UPDATE="--NoUpdates"
 else
   url="https://api.github.com/repos/Jackett/Jackett/releases/latest"
   vers="RELEASE"
+  tag=$(curl -sX GET "$url" | awk '/tag_name/{print $4;exit}' FS='[""]')
 fi
 
-echo "**** install jackett $vers ****"
-mkdir -p /app/Jackett
-jack_tag=$(curl -sX GET "$url" | awk '/tag_name/{print $4;exit}' FS='[""]')
-curl -o /tmp/jacket.tar.gz -L https://github.com/Jackett/Jackett/releases/download/$jack_tag/Jackett.Binaries.Mono.tar.gz
-tar xf /tmp/jacket.tar.gz -C /app/Jackett --strip-components=1
+ARCH=`uname -m`
+
+echo "***** installing Jackett bin, version $vers / tag $tag for arch $ARCH *****"
+if [ "$ARCH" == "x86_64" ]; then
+   BINARY="https://github.com/Jackett/Jackett/releases/download/$tag/Jackett.Binaries.LinuxAMDx64.tar.gz"
+elif [ "$ARCH" == "aarch64" ]; then
+   BINARY="https://github.com/Jackett/Jackett/releases/download/$tag/Jackett.Binaries.LinuxARM64.tar.gz"
+elif [ "$ARCH" == "armv7l" ]; then
+   BINARY="https://github.com/Jackett/Jackett/releases/download/$tag/Jackett.Binaries.LinuxARM32.tar.gz"
+else
+   echo "unknown arch"
+   exit
+fi
+
+curl -o /tmp/jackett.tar.gz -L "$BINARY"
+tar -xzf /tmp/jackett.tar.gz -C /app/
+#mv /tmp/Jackett/* /app/Jackett/
+
+chmod +x /app/Jackett/*.sh
+chmod +x /app/Jackett/jackett
 
 if [ $JACKETT_TRACKERFIX -eq 1 ]; then
   echo "***** TEMP FIX FOR TRACKERS *****"
